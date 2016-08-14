@@ -37,7 +37,7 @@ app.get('/latest/',function(req, res) {
     mongo.connect(mongoUrl, function(err,db) {
         if(err) throw err;
         var colle = db.collection('imagesearch');
-        colle.find({},{_id: 0}).sort({id:-1}).toArray(function (err, result) {
+        colle.find({},{_id: 0}).sort({$natural:-1}).limit(10).toArray(function (err, result) {
             if(err) throw err;
             res.send(result);
             db.close();
